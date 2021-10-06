@@ -1,0 +1,39 @@
+spring:
+  main:
+    log-startup-info: false
+  config:
+    activate:
+      on-profile: local
+    import: optional:configserver:http://localhost:8888/
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+app:
+  label: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  cloud:
+    config:
+      name: sgl-user
+      uri: http://sgl-config-server:8888
+      fail-fast: true
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+app:
+  label: docker
+
+
+
+
